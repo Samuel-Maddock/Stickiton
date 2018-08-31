@@ -1,0 +1,62 @@
+html {
+    height: 100%;
+    overflow: hidden !important;
+}
+
+body {
+    height: 100%;
+    background-color: $sticky-background-color;
+    overflow: hidden !important;
+}
+
+.textarea {
+    height: calc(100vh - 50px);
+    font-size: 0.9rem;
+    position: fixed;
+    max-height: 100% !important;
+    border: none;
+    padding-bottom: 0px;
+    background-color: transparent;
+    resize: none;
+    outline: none;
+    overflow: scroll;
+    color: $textarea-font-color;
+}
+
+.textarea:active {
+    -webkit-box-shadow: 0 -1px 1px 1px rgba(66, 64, 59, 0.3);
+    //-webkit-box-shadow: 0 0 0 0.125em rgba(66, 64, 59, 0.3);
+}
+
+.textarea:focus{
+    -webkit-box-shadow: 0 -1px 1px -1px rgba(66, 64, 59, 0.3);
+    //-webkit-box-shadow: 0 0 0 0.125em rgba(66, 64, 59, 0.3);
+}
+
+//   Code from: https://gist.github.com/devinrhode2/2573411 used to fix scrollbar on windows.
+::-webkit-scrollbar {
+    width: 8px; /* 1px wider than Lion. */
+    /* This is more usable for users trying to click it. */
+    background-color: rgba(0,0,0,0);
+    -webkit-border-radius: 100px;
+  }
+  /* hover effect for both scrollbar area, and scrollbar 'thumb' */
+  ::-webkit-scrollbar:hover {
+    background-color: rgba(0, 0, 0, 0.09);
+  }
+  
+  /* The scrollbar 'thumb' ...that marque oval shape in a scrollbar */
+  ::-webkit-scrollbar-thumb:vertical {
+    /* This is the EXACT color of Mac OS scrollbars. 
+       Yes, I pulled out digital color meter */
+    background: rgba(0,0,0,0.5);
+    -webkit-border-radius: 100px;
+  }
+  ::-webkit-scrollbar-thumb:vertical:active {
+    background: rgba(0,0,0,0.61); /* Some darker color when you click it */
+    -webkit-border-radius: 100px;
+  }
+
+  ::-webkit-scrollbar-corner{
+      background-color: transparent;
+  }

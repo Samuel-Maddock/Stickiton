@@ -1,0 +1,86 @@
+{
+  "name": "Stickiton",
+  "productName": "Stickiton",
+  "version": "0.6.0",
+  "description": "An electron based sticky-notes app",
+  "author": "Samuel Maddock",
+  "license": "ISC",
+  "main": "N",
+  "dependencies": {
+    "bulma": "^0.7.1",
+    "electron-compile": "^6.4.3",
+    "electron-squirrel-startup": "^1.0.0",
+    "font-awesome": "^4.7.0",
+    "is-electron-renderer": "^2.0.1",
+    "jquery": "^3.2.1",
+    "rgb-hex": "^2.1.0"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "electron-forge": "^5.2.2",
+    "electron-prebuilt-compile": "2.0.7"
+  },
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "build": {
+    "appId": "com.github.samuelmaddock.stickiton",
+    "asar": false,
+    "directories": {
+      "output": "./dist/win/Stickiton-Windows-Installer"
+    },
+    "files": [
+      {
+        "filter": [
+          "!dist${/*}"
+        ]
+      }
+    ],
+    "win": {
+      "icon": "stickiton/Icons/sticky.ico"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Samuel-Maddock",
+        "repo": "stickiton"
+      }
+    ]
+  },
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "npm"
+      },
+      "electronWinstallerConfig": {
+        "name": "Stickiton"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "Stickiton"
+      }
+    }
+  }
+}

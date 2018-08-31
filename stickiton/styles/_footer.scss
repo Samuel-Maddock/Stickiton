@@ -1,0 +1,41 @@
+.sticky-footer{
+    display: flex;
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 21px;
+    background-color: transparent;
+    border-top: 2px;
+    border-top-style: solid;
+    border-color: $footer-border;
+    z-index: 10;
+}
+
+#footer-div{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#footer-info{
+    display: flex;
+    color: white;
+    mix-blend-mode: difference;
+    font-size: 0.85rem;
+    margin-left: 2vw;
+    overflow-x: scroll;
+    white-space: nowrap;
+    width: 100%;
+    max-width: 100%; 
+}
+
+#footer-info:hover{
+    color: $menu-background-color;
+}
+
+#settings{
+    padding: 0px;
+    margin-left: 5px;
+    margin-top: 1.5px;
+    color: $menu-item-color;
+}

@@ -1,0 +1,21 @@
+@import "_colours.scss";
+@import "../../node_modules/bulma/sass/utilities/initial-variables.sass";
+
+
+$family-sans-serif: "Comfortaa";
+
+//Bulma Navigation Styles
+$navbar-item-color: #ef5c6e;
+$navbar-item-hover-color: black;
+
+//Bulma Tabs Styles
+$tabs-link-active-color: $sticky-background-color;
+$tabs-boxed-link-hover-background-color: $menu-light;
+$tabs-boxed-link-hover-border-bottom-color: $sticky-background-color;
+$tabs-link-hover-color: $menu-hover;
+
+@import "../../node_modules/bulma/bulma.sass"; 
+@import "_main.scss";
+@import "_nav.scss";
+@import "_menu.scss";
+@import "_footer.scss";

@@ -1,0 +1,145 @@
+
+@keyframes splashcolor {
+    0% {
+        background-color: #e8e285;
+    }
+
+    25% {
+        background-color: #eec2c2;
+    }
+
+    50% {
+        background-color: #c1edf5;
+    }
+
+    75% {
+        background-color: #c2e7a1;
+    }
+
+    100% {
+        background-color: #e8e285
+    }
+}
+
+#hidden-menu{
+    -webkit-app-region: drag;
+    display: none;
+    /*
+    -webkit-animation: splashcolor 10s infinite;
+    animation: splashcolor 10s infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+    position: relative; */
+    background-color: $menu-background-color;
+    height: calc(100vh - 22px);
+    width: 100%;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 5px 5px 5px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    z-index: 1;
+}
+
+.settings-nav{
+    margin-top: 10px;
+}
+
+.tabs ul {
+    border-color: $menu-background-color;
+}
+
+.tabs a {
+    color: $settings-color;
+    font-size: 1rem;
+}
+
+.tabs.is-boxed li.is-active a {
+    color: $settings-color;
+    border-color: $menu-background-color;    
+    background-color: $menu-background-color;
+}
+
+.tabs li:hover{
+    border-color: $menu-background-color;
+}
+
+.option{
+    margin-top: 20px;
+    margin-left: 10px;
+    background-color: $menu-light;
+    color: $sticky-background-color;
+}
+
+.option-wrapper{
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+// Color picker CSS
+
+#color-picker-container{
+    -webkit-app-region: no-drag !important;
+}
+
+#color-picker-container svg{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.settings-text{
+    color: $settings-color;
+    margin-bottom: 5px;
+}
+
+.cp-square{
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.label {
+    color: $settings-color;
+    font-size: 0.9rem;
+}
+
+.cp-settings{
+    background-color: $sticky-color-yellow !important;
+    -webkit-app-region: no-drag !important;
+}
+
+.cp-settings:focus{
+    border-color: yellow;
+}
+
+.select select:focus {
+    border-color: yellow !important;
+}
+
+.cp-dropdown{
+    width: 100%;
+}
+
+// For the drop down menu arrow
+.select:not(.is-multiple):not(.is-loading)::after {
+    border-color: $menu-background-color;
+}
+
+.field{
+    margin-bottom: 10px;
+}
+
+#hex-color{
+    font-size: 1.1rem;
+    text-shadow:
+    -1px -1px 0  rgba(0,0,0,0.4),  
+    1px -1px 0 rgba(0,0,0,0.4),
+    -1px 1px 0 rgba(0,0,0,0.4),
+    1px 1px 0 rgba(0,0,0,0.4);
+}
