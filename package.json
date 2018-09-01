@@ -5,7 +5,7 @@
   "description": "An electron based sticky-notes app",
   "author": "Samuel Maddock",
   "license": "ISC",
-  "main": "N",
+  "main": "stickiton/main.js",
   "dependencies": {
     "bulma": "^0.7.1",
     "electron-compile": "^6.4.3",
@@ -58,6 +58,7 @@
           "squirrel"
         ],
         "darwin": [
+          "dmg",
           "zip"
         ],
         "linux": [
@@ -66,13 +67,19 @@
         ]
       },
       "electronPackagerConfig": {
-        "packageManager": "npm"
+        "packageManager": "npm",
+        "icon": "./stickiton/Icons/sticky.icns"
       },
       "electronWinstallerConfig": {
         "name": "Stickiton"
       },
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
+      "electronInstallerDMG": {
+        "icon": "stickiton/Icons/sticky.icns",
+        "background": "stickiton/Icons/background.png",
+        "format": "ULFO"
+      },
       "github_repository": {
         "owner": "",
         "name": ""

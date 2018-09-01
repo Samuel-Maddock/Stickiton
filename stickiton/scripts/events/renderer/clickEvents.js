@@ -45,11 +45,11 @@ $(".newNote").click(() => {
 });
 
 $(".openFile").click(() => {
-    openNote();
+    openFileInNewNote();
 });
 
 $("#footer-info").click(() => {
-    openNote(true);
+    openFileInNewNote();
 });
 
 $(".save").click(() => {
@@ -58,18 +58,21 @@ $(".save").click(() => {
 
 $(".close").click(() => {
     let currentContent = document.getElementById("note").innerText;
-    if ((currentContent == "") || (currentContent == noteManager.lastSavedContent)) {
-        noteManager.closeWindow();
-    } else {
-        dialog.showMessageBox({ type: "question", buttons: ["Yes", "No"], title: "Save File?", message: "Unsaved changes have been made, save the file?", icon: dialogImage }, (response, checkboxChecked) => {
+    if (currentContent != noteManager.lastSavedContent){
+        dialog.showMessageBox({ type: "question", buttons: ["Yes", "No", "Cancel"], title: "Save File?", message: "Unsaved changes have been made, save the file?", icon: dialogImage }, (response, checkboxChecked) => {
             if (response == 1) {
                 noteManager.closeWindow();
-            } else {
+            } else if (response == 0) {
                 let hasSaved = noteManager.saveFile();
                 if (hasSaved) { noteManager.closeWindow() };
-            };
+            } else {
+                // The user has closed the dialog or clicked cancel
+                return;
+            }
         });
-    };
+    } else  {
+        noteManager.closeWindow();
+    }
 });
 
 $(".minimize").click(() => {

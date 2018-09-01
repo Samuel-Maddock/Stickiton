@@ -4,6 +4,11 @@ let WindowState = require("../../core/WindowState")
 let StateHandler = require("../../core/StateHandler")
 const mainBgColor = "#e8e285";
 const APP_PATH = app.getAppPath();
+let dialogImage = APP_PATH + "/stickiton/Icons/png/512x512.png";
+
+if (process.platform == "win32") {
+    dialogImage = remote.app.getAppPath() + "/stickiton/Icons/sticky.ico";
+}
 
 function saveWindowStates(){
     let windowStateList = [];
@@ -38,7 +43,7 @@ function closeApp(){
                 buttons: ["Yes, save all", "No, exit", "Cancel"], 
                 title: "Save All Notes", 
                 message: "Do you want to save all unsaved changes before exiting?",
-                //icon: dialogImage
+                icon: dialogImage
             }, (response, checkboxChecked) => {
                 if (response == 0){
                     for (let index in WindowManager.windows) {

@@ -1,6 +1,6 @@
 let isRenderer = require("is-electron-renderer");
 let remote = require("electron").remote;
-const { BrowserWindow } = require('electron');
+const { BrowserWindow} = require('electron');
 let win; 
 
 let noteColors = require("./NoteColors")
@@ -38,8 +38,8 @@ let template = [
           }
         }},
         {type: "separator"},
-        {label: "Open File", accelerator: "CmdOrCtrl+O", click () {validateMenuOption(() => {getWindow().webContents.send("openNote", "")})}},
-        {label: "Open File In New Note", click () {validateMenuOption(()=> {getWindow().webContents.send("openFileInNewNote")})}},
+        {label: "Open File", accelerator: "CmdOrCtrl+O", click () {validateMenuOption(() => {getWindow().webContents.send("openFileInNewNote")})}},
+        {label: "Open File In Current Note...", click () {validateMenuOption(()=> {getWindow().webContents.send("openFileInCurrentNote")})}},
         {type: "separator"},
         {label: "Save Note", accelerator: "CmdOrCtrl+S", click () {validateMenuOption(() => {getWindow().webContents.send("saveNote", "")})}},
         {label:"Save Note as...", accelerator: "CmdOrCtrl+S+shift", click () {validateMenuOption(() => {getWindow().webContents.send("saveNoteAs", "")})}},
@@ -62,16 +62,13 @@ let template = [
         {role: 'selectall'}
       ]
     },
-    /**{
+    {
       label: 'View',
       submenu: [
         {role: 'toggledevtools'},
         {type: 'separator'},
-        {role: 'resetzoom'},
-        {role: 'zoomin'},
-        {role: 'zoomout'}
       ]
-    },*/
+    },
     {
       label: "Colour",
       submenu: [

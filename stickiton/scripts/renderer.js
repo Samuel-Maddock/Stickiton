@@ -9,7 +9,6 @@ webFrame.setVisualZoomLevelLimits(1, 1);
 webFrame.setLayoutZoomLevelLimits(0, 0); 
 
 let noteManager = require("./scripts/core/NoteManager");
-
 let dialogImage = remote.app.getAppPath() + "/stickiton/Icons/png/512x512.png";
 
 if (process.platform == "win32") {
@@ -19,9 +18,9 @@ if (process.platform == "win32") {
 function openMessageBox(callback) {
     dialog.showMessageBox({
         type: "question",
-        buttons: ["Save and open in current note", "Open in separate note", "Cancel"],
-        title: "Save File?",
-        message: "You are attempting to open a new file...",
+        buttons: ["Save and open in current note", "Open in current note", "Cancel"],
+        title: "Save Current File?",
+        message: "You are attempting to open a new file",
         icon: dialogImage
     }, callback);
 }
@@ -41,52 +40,24 @@ function openFileInNewNote(){
     });
 }
 
-function openNote(openDirectoryFirst = false) {
-    if (openDirectoryFirst && noteManager.hasFileOpen) {
-        openDirectoryBox((fileNames) => {
-            if (fileNames == undefined) {
-                return;
-            }
-            let fileName = fileNames[0]
+function openFileInCurrentNote(){
+    openDirectoryBox((fileNames) => {
+        if (fileNames == undefined) {
+            return;
+        }
+        let fileName = fileNames[0];
+        let window = remote.getCurrentWindow();
+
+        if (noteManager.hasFileOpen){
             openMessageBox((response, checkboxChecked) => {
-                let window = remote.getCurrentWindow();
-                if (response == 0) {
-                    noteManager.saveFile();
-                    ipcRenderer.send("openIfNotAlready", {filePath: fileName, windowPosition: window.getPosition(), newWindow: false, winId: window.id}); //Open file in current note window
-                } else if (response == 1) {
-                    ipcRenderer.send("openIfNotAlready", {filePath: fileName, windowPosition: window.getPosition()});
+                if (response == 0){
+                    noteManager.saveFile()
                 }
             });
-        });
-    } else if (noteManager.hasFileOpen) {
-        openMessageBox((response, checkboxChecked) => {
-            if (response != 2) {
-                openDirectoryBox((fileNames) => {
-                    if (fileNames == undefined) {
-                        return;
-                    };
-                    let fileName = fileNames[0]
-                    let window = remote.getCurrentWindow();
-                    if (response == 0) {
-                        noteManager.saveFile();
-                        ipcRenderer.send("openIfNotAlready", {filePath: fileName, windowPosition: window.getPosition(), newWindow: false, winId: window.id}); //Open file in current note window
-                    } else if (response == 1) {
-                        ipcRenderer.send("openIfNotAlready", {filePath: fileName, windowPosition: window.getPosition()});
-                    };
-                });
-            };
-        });
-    } else {
-        dialog.showOpenDialog({ filters: [{ name: "Text file (.txt)", extensions: ["txt"] }], properties: ["openFile"] }, (fileNames) => {
-            if (fileNames == undefined) {
-                return;
-            };
-            let fileName = fileNames[0];
-            let window = remote.getCurrentWindow();
-            ipcRenderer.send("openIfNotAlready", {filePath: fileName, windowPosition: window.getPosition(), newWindow: false, winId: window.id});
-        });
-    };
-};
+        }
+        ipcRenderer.send("openIfNotAlready", {filePath: fileName, windowPosition: window.getPosition(), newWindow: false, winId: window.id});
+    });
+}
 
 require("./scripts/events/renderer/clickEvents"); //Load DOM click events
 require("./scripts/events/renderer/ipcEvents");   //Load ipcRenderer events

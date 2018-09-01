@@ -18,9 +18,12 @@ ipcRenderer.on("openSettings", (event, message) => {
     // Disable footer notification balloon and opening file via click
     $("#footer-div").addClass("disable-balloon");
     $("#footer-info").css("pointer-events", "none");
-
+    // Fade out the nav bar and fade in the menu
+    // Trigger the background color input and focus it
+    $("#cpi-background").trigger("click");
     $("#hidden-menu").fadeIn("slow");
     $(".navbar").fadeOut("fast");
+    $("#cpi-background").focus();
 });
 
 ipcRenderer.on("closeSettings", (event, message) => {
@@ -59,7 +62,7 @@ ipcRenderer.on("colourNote", (event, message) => {
     let colorIndex = 3;
     if (process.platform === "darwin"){
         colorIndex = 4;
-    };
+    }
 
     let colorMenuItems = menu.items[colorIndex].submenu.items;
     // If color is in colors array then update the menu options
@@ -87,8 +90,8 @@ ipcRenderer.on("newNote", (event, message) => {
     ipcRenderer.send("newNote", {windowPosition: win.getPosition()});
 });
 
-ipcRenderer.on("openNote", (event, message) => {
-    openNote();
+ipcRenderer.on("openFileInCurrentNote", (event, message) => {
+    openFileInCurrentNote();
 });
 
 ipcRenderer.on("openFileInNewNote", (event, message) => {

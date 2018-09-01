@@ -6,11 +6,23 @@ class NoteManager {
         this.id = "";
         this.windowSize = [];
         this.windowPosition = [];
-        this.currentFile = "";
+        this.fileName = "";
+        this.currentFile = ""; // Rename to currentFilePath
         this.lastSavedContent = ""; //The content of the note that has been last saved to disk
         this.content = ""; //The current content of the note 
         this.hasFileOpen = false;
         this.settings = require("../events/renderer/SettingsManager");
+    }
+
+    getFileName(filePath){
+        let shortPath = "";
+        let pathArray;
+        if (process.platform === "darwin") {
+            pathArray = filePath.split("/");
+        } else {
+            pathArray = filePath.split("\\");
+        }
+        return pathArray[pathArray.length - 1];
     }
 
     getShortPath(filePath) {
@@ -77,6 +89,7 @@ class NoteManager {
             this.currentFile = filePath;
             this.lastSavedContent = data;
             this.setFooterContent(filePath, undefined, true);
+            this.fileName = this.getFileName(filePath);
             let shortPath = this.getShortPath(filePath);
             this.addFooterNotification(shortPath, shortPath, filePath);
         });

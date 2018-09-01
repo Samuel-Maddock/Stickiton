@@ -2,6 +2,7 @@ const { BrowserWindow, Menu, app } = require('electron');
 const path = require('path');
 const url = require('url');
 let noteColors = require("../..//core/NoteColors");
+let MenuTemplate = require("../../core/menuTemplate")
 const colors = noteColors.getColorArray();
 
 function getRandomInt(min, max) {
@@ -49,7 +50,7 @@ class WindowManager {
     };
 
     win.isInitialised = false;
-
+    let windowManager = this;
     this.windows.push(win); //Add it to global list of windows
 
     win.loadURL(url.format({ //Load index.html for the window
@@ -191,6 +192,20 @@ class WindowManager {
         win.webContents.send("loadNote", { filePath: filePath });
       }
       win.webContents.send("colourNote", {backgroundColor: backgroundColor, menuColor: backgroundColor});
+    });
+  }
+
+  getNoteList() {
+    this.updateNoteManagers(() => {
+      let noteList = [];
+      for (let index in this.noteManagerList){
+        let noteManager = this.noteManagerList[index];
+        if (!noteManager.hasFileOpen){
+          noteList.push("Sticky Note " + noteManager.id);
+        } else{
+          noteList.push(noteManager.fileName);
+        }
+      }
     });
   }
 
